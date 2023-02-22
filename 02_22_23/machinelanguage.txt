@@ -1,0 +1,28 @@
+int a = 5; 0000 0101
+int b = -119;
+int c = a + b;
+
+2305
+332B
+2389
+332D
+132B
+142D
+5F34
+3F24
+C000
+
+
+Lecture Activity: Convert from C++ to machine language
+int x = 56;
+int y = 90;
+int z = -67;
+z = (x + y) + z;
+
+
+
+
+Two's complement:
+119 = 0111 0111 --complement--> 1000 1000 --add 1--> 1000 1001
+114 = 0111 0010 --complement--> 1000 1101 --add 1--> 1000 1110
+
