@@ -6,32 +6,25 @@
 
 using namespace std;
 
-bool validateUnits(string units)
-{
-    transform(units.begin(), units.end(), units.begin(), ::toupper);
-    bool valid = !(units != "B" && units != "KB" && units != "MB" && units != "GB" && units != "TB");
-    return valid;
-}
+bool validateUnits(string units);
+int secret(int x);
+void resetStream(istream &in);
+void inputInt(istream &in, int &x, string prompt);
+int count();
 
 int main()
 {
     long long memSize;
     string units;
+    int mem;
 
-    cout << "Enter the memory size: ";
-    cin >> memSize;
-    cout << endl;
-    while (!cin || memSize < 0)
+    inputInt(cin, mem, "Enter the memory size:");
+
+    while (mem < 0)
     {
-        if (!cin)
-        {
-            cin.clear();
-            cin.ignore(INT_MAX, '\n');
-        }
+
         cout << "The value entered is invalid. Please enter a number greater than 0." << endl;
-        cout << "Enter the memory size: ";
-        cin >> memSize;
-        cout << endl;
+        inputInt(cin, mem, "Enter the memory size:");
     }
     cout << "Enter the memory units (B, KB, MB, GB, TB): ";
     cin >> units;
@@ -48,22 +41,80 @@ int main()
 
     if (units == "TB")
     {
-        memSize = memSize * pow(2, 40);
+        memSize = mem * pow(2, 40);
     }
     else if (units == "GB")
     {
-        memSize = memSize * pow(2, 30);
+        memSize = mem * pow(2, 30);
     }
     else if (units == "MB")
     {
-        memSize = memSize * pow(2, 20);
+        memSize = mem * pow(2, 20);
     }
     else if (units == "KB")
     {
-        memSize = memSize * pow(2, 10);
+        memSize = mem * pow(2, 10);
+    }
+    else
+    {
+        memSize = mem;
     }
 
     cout << "The minimum MAR needed is " << ceil(log2(memSize)) << " bits." << endl;
+    int y = 3;
+    y = secret(y);
+
+    for (int i = 0; i < 10; i++)
+    {
+        cout << count() << endl;
+    }
 
     return 0;
+}
+
+bool validateUnits(string units)
+{
+    transform(units.begin(), units.end(), units.begin(), ::toupper);
+    bool valid = !(units != "B" && units != "KB" && units != "MB" && units != "GB" && units != "TB");
+    return valid;
+}
+
+int secret(int x)
+{
+    if (x > 5)
+        return 2 * x;
+
+    return x;
+}
+
+void resetStream(istream &in)
+{
+    in.clear();
+    in.ignore(INT_MAX, '\n');
+    cout << "You entered something that is not a number!" << endl;
+}
+
+void inputInt(istream &in, int &x, string prompt)
+{
+    if (prompt != "")
+    {
+        cout << prompt << " ";
+    }
+    in >> x;
+    while (!in)
+    {
+        resetStream(in);
+        if (prompt != "")
+        {
+            cout << prompt << " ";
+        }
+        in >> x;
+    }
+}
+
+int count()
+{
+    static int numTimes = 0;
+    // do something that increases the value of numTimes by 1;
+    return numTimes;
 }
