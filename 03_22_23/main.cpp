@@ -116,5 +116,6 @@ int count()
 {
     static int numTimes = 0;
     // do something that increases the value of numTimes by 1;
+    numTimes++;
     return numTimes;
 }
