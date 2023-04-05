@@ -2,8 +2,6 @@
 #include <string>
 #include <climits>
 
-using namespace std;
-
 /* const int BLUE = 0;
 const int RED = 1;
 const int GREEN = 2;
@@ -20,8 +18,8 @@ enum colorType
 
 // create an enum of breakfast cereal with at least 4 values
 
-string colorToString(colorType);
-colorType inputColor(string);
+std::string colorToString(colorType);
+colorType inputColor(std::string);
 void resetStream();
 
 // create an input and output function for your enum
@@ -29,21 +27,21 @@ void resetStream();
 int main()
 {
     colorType color = BLUE;
-    cout << colorToString(color) << " = " << color << endl;
+    std::cout << colorToString(color) << " = " << color << std::endl;
     color = inputColor("Choose your favorite color");
-    cout << "Your favorite color is " << colorToString(color) << endl;
+    std::cout << "Your favorite color is " << colorToString(color) << std::endl;
     color = inputColor("Choose your neighbor's favorite color");
-    cout << "Your neighbor's favorite color is " << colorToString(color) << endl;
-    string a = "hello ";
-    string b = "there ";
-    cout << a << b << colorToString(color) << endl;
+    std::cout << "Your neighbor's favorite color is " << colorToString(color) << std::endl;
+    std::string a = "hello ";
+    std::string b = "there ";
+    std::cout << a << b << colorToString(color) << std::endl;
 
     // create a cereal variable use your functions to do input and output of the variable.
 
     return 0;
 }
 
-string colorToString(colorType theColor)
+std::string colorToString(colorType theColor)
 {
     switch (theColor)
     {
@@ -62,24 +60,24 @@ string colorToString(colorType theColor)
     }
 }
 
-colorType inputColor(string prompt)
+colorType inputColor(std::string prompt)
 {
     int colorInt;
     colorType theColor;
-    cout << prompt << endl;
+    std::cout << prompt << std::endl;
     for (int i = 0; i <= PURPLE; i++)
     {
-        cout << i + 1 << ". " << colorToString(static_cast<colorType>(i)) << endl;
+        std::cout << i + 1 << ". " << colorToString(static_cast<colorType>(i)) << std::endl;
     }
-    cin >> colorInt;
-    while (!cin || colorInt - 1 < BLUE || colorInt - 1 > PURPLE)
+    std::cin >> colorInt;
+    while (!std::cin || colorInt - 1 < BLUE || colorInt - 1 > PURPLE)
     {
-        if (!cin)
+        if (!std::cin)
         {
             resetStream();
         }
-        cout << "Please choose a color from the list." << endl;
-        cin >> colorInt;
+        std::cout << "Please choose a color from the list." << std::endl;
+        std::cin >> colorInt;
     }
     switch (colorInt - 1)
     {
@@ -107,7 +105,7 @@ colorType inputColor(string prompt)
 
 void resetStream()
 {
-    cin.clear();
-    cin.ignore(INT_MAX, '\n');
-    cout << "You entered something that is not a number!" << endl;
+    std::cin.clear();
+    std::cin.ignore(INT_MAX, '\n');
+    std::cout << "You entered something that is not a number!" << std::endl;
 }
