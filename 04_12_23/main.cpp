@@ -28,6 +28,9 @@ void initialize(int[], int); // fill in for lecture activity
 void outputList(int[], int);
 void findLargest(int[], int, int &);
 void calculateSumAndAvg(int[], int, int &, double &);
+void search(int[], int, int, int &);
+void sort(int[], int);
+void pickColors(colorType[][3], int, int);
 
 int main()
 {
@@ -52,6 +55,22 @@ int main()
 
     colorType mycolor = inputColor("Pick your favorite color: ");
     std::cout << colorToString(mycolor) << std::endl;
+    int loc;
+    search(list, numItems, 50, loc);
+    if (loc == -1)
+    {
+        std::cout << "The number is not in the list." << std::endl;
+    }
+    else
+    {
+        std::cout << "The number is at position " << loc << std::endl;
+    }
+    sort(list, numItems);
+    outputList(list, numItems);
+
+    colorType colorTable[ARRAY_SIZE][3];
+    colorTable[0][0] = GREEN;
+    pickColors(colorTable, numItems, 3);
 
     return 0;
 }
@@ -134,4 +153,42 @@ void calculateSumAndAvg(int list[], int size, int &sum, double &avg)
         sum += list[i]; // sum = sum + list[i];
     }
     avg = sum / static_cast<double>(size);
+}
+
+void search(int list[], int size, int searchItem, int &location)
+{
+    location = -1;
+    for (int i = 0; i < size; i++)
+    {
+        if (list[i] == searchItem)
+        {
+            location = i;
+            break;
+        }
+    }
+}
+
+void sort(int list[], int size)
+{
+    for (int i = size; i > 0; i--)
+    {
+        int pos;
+        int temp;
+        findLargest(list, i, pos);
+        temp = list[pos];
+        list[pos] = list[i - 1];
+        list[i - 1] = temp;
+    }
+}
+
+void pickColors(colorType colorList[][3], int numRows, int numCols)
+{
+    for (int row = 0; row < numRows; row++)
+    {
+        for (int col = 0; col < numCols; col++)
+        {
+            std::string prompt = "Pick the color for [" + std::to_string(row) + "][" + std::to_string(col) + "]";
+            colorList[row][col] = inputColor(prompt);
+        }
+    }
 }
