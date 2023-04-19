@@ -1,0 +1,11 @@
+#ifdef _WIN32
+#include <Windows.h>
+#endif
+
+
+in main
+#ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8);
+#endif
+
+string diamond = "♦"; 
